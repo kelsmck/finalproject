@@ -1,0 +1,42 @@
+import nltk
+from nltk import bigrams
+string = "you received three phone calls while you were out"
+string_bigrams = bigrams(string)
+print string_bigrams
+
+from nltk import ngrams
+sentence = 'the oil in my car needs to be changed '
+n = 6
+sixgrams = ngrams(sentence.split(), n)
+
+for grams in sixgrams:
+  print grams
+n = 3
+b = "received"
+[b[i:i+n] for i in range(len(b)-n+1)]
+# output should be ['rec', 'ece', 'cei', 'eiv', 'ive', 'ved']
+def word2ngrams(text, n=3, exact=True):
+  """ Convert text into character ngrams. """
+  return ["".join(j) for j in zip(*[text[i:] for i in range(n)])]
+word2ngrams('abhurites') ""from the american_word.txt""
+# output should be ['abh', 'bhu', 'hur', 'uri', 'rit', 'ite', 'tes']
+import string, random, time
+
+def zip_ngrams(text, n=3, exact=True):
+  return ["".join(j) for j in zip(*[text[i:] for i in range(n)])]
+
+def nozip_ngrams(text, n=3):
+    return [text[i:i+n] for i in range(len(text)-n+1)]
+
+# Generate 10000 random strings of length 100.
+words = [''.join(random.choice(string.ascii_uppercase) for j in range(100)) for i in range(10000)]
+
+start = time.time()
+x = [zip_ngrams(w) for w in words]
+print time.time() - start
+
+start = time.time()
+y = [nozip_ngrams(w) for w in words]
+print time.time() - start        
+
+print x==y
